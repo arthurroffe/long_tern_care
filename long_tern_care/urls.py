@@ -18,6 +18,7 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import include
 from long_tern_care_api import views
+from django.views.generic import RedirectView
 
 router = DefaultRouter()
 router.register(r'api', views.UserViewSet)
@@ -26,4 +27,5 @@ urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'api', include(router.urls)),
     path('login/', views.LoginView.as_view(), name='login'),
+    path(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico')),
 ]
