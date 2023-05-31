@@ -27,5 +27,6 @@ urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'api', include(router.urls)),
     path('login/', views.LoginView.as_view(), name='login'),
-    path(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico')),
+    path('api/users/create/', views.UserCreateView.as_view(), name='user-create'),
+    #path(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico')),
 ]
