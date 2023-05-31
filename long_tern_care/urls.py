@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from long_tern_care_api import views
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import include
-from views import LoginView
+from long_tern_care_api import views
+
 router = DefaultRouter()
 router.register(r'api', views.UserViewSet)
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'api', include(router.urls)),
-    path('login/', LoginView.as_view(), name='login'),
+    path('login/', views.LoginView.as_view(), name='login'),
 ]
