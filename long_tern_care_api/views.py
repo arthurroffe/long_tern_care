@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 # Create your views here.
-from long_tern_care_api.models import User
+from long_tern_care_api.models import *
 from long_tern_care_api.serializers import UserSerializer
 
 from rest_framework import viewsets, generics
@@ -46,7 +46,7 @@ class LogoutView(APIView):
             return Response(status=204)
 
 class UserCreateView(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = UserManager.objects.all()
     serializer_class = UserSerializer
     permission_classes = []
     
