@@ -1,0 +1,57 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/postgres
+{
+  "name": "longterncareapi",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/poetry:2": {
+      "version": "1.4"
+    }
+  },
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // This can be used to network with other containers or the host.
+  "forwardPorts": [5432],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": {
+    "set_user_permission": "sudo chown $(whoami) .venv",
+    "set_poetry_venv": "poetry config virtualenvs.in-project true",
+    "gen_local_dotenv": "sh scripts/gen_dotenv.sh -e local"
+  },
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "arjun.swagger-viewer",
+        "bierner.markdown-mermaid",
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "foxundermoon.shell-format",
+        "IronGeek.vscode-env",
+        "mhutchie.git-graph",
+        "ms-azuretools.vscode-docker",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  },
+
+  // Set the targeted mounts. More info: https://code.visualstudio.com/remote/advancedcontainers/improve-performance
+  "mounts": ["source=venv,target=${containerWorkspaceFolder}/.venv,type=volume"]
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}

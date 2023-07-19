@@ -1,4 +1,4 @@
-"""long_tern_care URL Configuration
+"""ltcs URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,16 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from rest_framework.routers import DefaultRouter
-from django.conf.urls import include
-from long_tern_care_api import views
+from django.urls import include, path
+from rest_framework import routers
 
-router = DefaultRouter()
-router.register(r'api', views.UserViewSet)
+from accounts import views
+
+router = routers.SimpleRouter(trailing_slash=False)
+router.register('users', views.UserViews, basename='users')
 
 urlpatterns = [
-    path(r'admin/', admin.site.urls),
-    path(r'api', include(router.urls)),
-    path('login/', views.LoginView.as_view(), name='login'),
+    path("admin/", admin.site.urls),
+    path('', include(router.urls)),
+    path('token', views.TokenView.as_view())
 ]
