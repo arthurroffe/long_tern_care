@@ -1,0 +1,9 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: python-app
+    src: ./ltcs/
+    engine: python3.9
+    primary: true
+    run: uvicorn ltcs.asgi:app
+    dev: uvicorn ltcs.asgi:app --reload
